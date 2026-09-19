@@ -9,25 +9,23 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class GroupFactory {
-    private static Map<String, Group> groupIdToGroupMap;
+    private static Map<String, Group> groupIdToGroupMap = new HashMap<>();
     private static final Logger log = Logger.getLogger(GroupFactory.class.getName());
-
-    GroupFactory(){
-        this.groupIdToGroupMap = new HashMap<>();
-    }
 
     public static Group getGroup(String groupId){
         return groupIdToGroupMap.get(groupId);
     }
 
     //Creates a group and updates groupIdToGroup map
-    public void createGroup(User createdByUser, List<User> membersToBeAddedList){
+    public Group createGroup(User createdByUser, List<User> membersToBeAddedList){
         //creates new group
         Group group = new Group(createdByUser, membersToBeAddedList);
         String groupId = group.getGroupId();
         groupIdToGroupMap.put(groupId,group);
-        // Update the group reference in User State
+        // Update the group reference in User State including the creator
+        membersToBeAddedList.add(createdByUser);
         addGroupToUsersState(membersToBeAddedList, group);
+        return group;
     }
 
     // Filters out already existing members in the group and adds only new members

@@ -26,13 +26,13 @@ public class BalanceSheet {
     //If amount is negative, then the current user needs to get that amount from the particular user.
     public void addOweAmount(User user, BigDecimal amount){
         usersToAmountMap.compute(user, (k, currentOweToUser) -> currentOweToUser.add(amount));
-        totalOweAmount.add(amount).setScale(2, RoundingMode.HALF_UP);;
+        totalOweAmount=totalOweAmount.add(amount).setScale(2, RoundingMode.HALF_UP);;
     }
 
     //Reduces the amount the current user owes to that particular user
     public void reduceOweAmount(User user, BigDecimal amount){
         usersToAmountMap.compute(user, (k, currentOweToUser) -> currentOweToUser.subtract(amount));
-        totalOweAmount.subtract(amount).setScale(2, RoundingMode.HALF_UP);;
+        totalOweAmount=totalOweAmount.subtract(amount).setScale(2, RoundingMode.HALF_UP);;
     }
 
     public BigDecimal getTotalOweAmount() {

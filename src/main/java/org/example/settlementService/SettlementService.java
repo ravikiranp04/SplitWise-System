@@ -17,7 +17,7 @@ public class SettlementService {
         // Prevent updating balance sheet of user by other members of group during settlement.
         synchronized(balanceSheet){
             BigDecimal amountToBeSettled = balanceSheet.getTotalOweAmount();
-            if(amountToBeSettled.equals(0)){
+            if(amountToBeSettled.compareTo(BigDecimal.ZERO)<=0){
                 log.info("No Dues Pending");
                 return;
             }

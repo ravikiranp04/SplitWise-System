@@ -4,6 +4,7 @@ import org.example.groupUtils.Group;
 import org.example.settlementService.SettlementService;
 
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public class User {
@@ -16,6 +17,10 @@ public class User {
     private Map<String,BalanceSheet> groupIdToBalanceSheetMap;
     private static final Logger log = Logger.getLogger(User.class.getName());
 
+    public User(String userId, String name){
+        this.name = name;
+        this.userId = userId;
+    }
     public void addGroupToUserState(String groupId, Group group){
         groupIdToGroupMap.put(groupId,group);
         BalanceSheet balanceSheet = new BalanceSheet();

@@ -24,18 +24,14 @@ public class Group {
 
 
     //Adding selected members into the group
-    public void addMembers(List<User> membersList){
-        for(User member: membersList){
-            membersList.add(member);
-        }
+    public void addMembers(List<User> membersToAdd){
+        membersList.addAll(membersToAdd);
 
     }
 
     //removing selected members from the group
-    public void removeMembers(List<User> membersList){
-        for(User member: membersList){
-            membersList.remove(member);
-        }
+    public void removeMembers(List<User> membersToRemove){
+        membersList.removeAll(membersToRemove);
     }
 
     public String getGroupId() {
